@@ -29,6 +29,9 @@ class App extends React.Component {
     // Two ways to create modifiers:
     // 1. as an arrow function class variable
     // 2. as a method that you .bind
+    // this._increment = this._increment.bind(this);
+    // this._decrement = this._decrement.bind(this);
+  
   }
 
   // "render()" is a built-in React method.
@@ -47,20 +50,24 @@ class App extends React.Component {
   }
 
   // modifier function as an arrow function
-  _increment = () => {
+  // by using an arrow function assigned to a variable,
+  // the value of the keyword `this` gets *locked in*
+  // When you hand off ("pass as an argument") a function
+  // the keyword `this` loses its reference.
+  _increment = (howMuch=1) => {
     this.setState({
       // what key/value pairs in state to update?
-      count: this.state.count + 1
+      count: this.state.count + howMuch
     }, () => {
-      console.log(`Updated count to ${this.state.count}`);
+      console.log(`Updated count to ${this.state.count} with regular method`);
     });
   }
 
-  _decrement = () => {
+  _decrement = (howMuch=1) =>{
     this.setState({
-      count: this.state.count - 1
+      count: this.state.count - howMuch
     }, () => {
-      console.log(`Updated count to ${this.state.count}`);
+      console.log(`Updated count to ${this.state.count} with regular method`);
     })
   }
 
